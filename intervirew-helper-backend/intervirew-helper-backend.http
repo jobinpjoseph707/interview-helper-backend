@@ -1,0 +1,6 @@
+@intervirew_helper_backend_HostAddress = http://localhost:5136
+
+GET {{intervirew_helper_backend_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
