@@ -59,7 +59,7 @@ public class InterviewAppDbContext : DbContext
         modelBuilder.Entity<ApplicationRole>().HasData(
             new ApplicationRole { ApplicationRoleId = 1, Name = "Front End Developer", IsActive = true },
             new ApplicationRole { ApplicationRoleId = 2, Name = "Back End Developer", IsActive = true },
-            new ApplicationRole { ApplicationRoleId = 3, Name = "Database/SQl", IsActive = true }
+            new ApplicationRole { ApplicationRoleId = 3, Name = "Database/SQL", IsActive = true }
         );
         modelBuilder.Entity<ExperienceLevel>().HasData(
             new ExperienceLevel { ExperienceLevelId = 1, Level = "Fresher", IsActive = true },
