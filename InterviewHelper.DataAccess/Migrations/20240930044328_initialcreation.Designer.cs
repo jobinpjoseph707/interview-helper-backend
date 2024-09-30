@@ -8,11 +8,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace intervirew_helper_backend.Migrations
+namespace InterviewHelper.DataAccess.Migrations
 {
     [DbContext(typeof(InterviewAppDbContext))]
-    [Migration("20240927065159_interview-Helper")]
-    partial class interviewHelper
+    [Migration("20240930044328_initialcreation")]
+    partial class initialcreation
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -42,6 +42,26 @@ namespace intervirew_helper_backend.Migrations
                     b.HasKey("ApplicationRoleId");
 
                     b.ToTable("ApplicationRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            ApplicationRoleId = 1,
+                            IsActive = true,
+                            Name = "Front End Developer"
+                        },
+                        new
+                        {
+                            ApplicationRoleId = 2,
+                            IsActive = true,
+                            Name = "Back End Developer"
+                        },
+                        new
+                        {
+                            ApplicationRoleId = 3,
+                            IsActive = true,
+                            Name = "Database/SQl"
+                        });
                 });
 
             modelBuilder.Entity("intervirew_helper_backend.Models.Candidate", b =>
@@ -127,6 +147,26 @@ namespace intervirew_helper_backend.Migrations
                     b.HasKey("ExperienceLevelId");
 
                     b.ToTable("ExperienceLevels");
+
+                    b.HasData(
+                        new
+                        {
+                            ExperienceLevelId = 1,
+                            IsActive = true,
+                            Level = "Fresher"
+                        },
+                        new
+                        {
+                            ExperienceLevelId = 2,
+                            IsActive = true,
+                            Level = "Mid"
+                        },
+                        new
+                        {
+                            ExperienceLevelId = 3,
+                            IsActive = true,
+                            Level = "Senior"
+                        });
                 });
 
             modelBuilder.Entity("intervirew_helper_backend.Models.Question", b =>
@@ -182,6 +222,188 @@ namespace intervirew_helper_backend.Migrations
                     b.HasKey("TechnologyId");
 
                     b.ToTable("Technologies");
+
+                    b.HasData(
+                        new
+                        {
+                            TechnologyId = 1,
+                            IsActive = true,
+                            Name = "Angular"
+                        },
+                        new
+                        {
+                            TechnologyId = 2,
+                            IsActive = true,
+                            Name = "React"
+                        },
+                        new
+                        {
+                            TechnologyId = 3,
+                            IsActive = true,
+                            Name = "Vue.js"
+                        },
+                        new
+                        {
+                            TechnologyId = 4,
+                            IsActive = true,
+                            Name = "Svelte"
+                        },
+                        new
+                        {
+                            TechnologyId = 5,
+                            IsActive = true,
+                            Name = "HTML5"
+                        },
+                        new
+                        {
+                            TechnologyId = 6,
+                            IsActive = true,
+                            Name = "CSS3"
+                        },
+                        new
+                        {
+                            TechnologyId = 7,
+                            IsActive = true,
+                            Name = "JavaScript"
+                        },
+                        new
+                        {
+                            TechnologyId = 8,
+                            IsActive = true,
+                            Name = "TypeScript"
+                        },
+                        new
+                        {
+                            TechnologyId = 9,
+                            IsActive = true,
+                            Name = "Bootstrap"
+                        },
+                        new
+                        {
+                            TechnologyId = 10,
+                            IsActive = true,
+                            Name = "TailwindCSS"
+                        },
+                        new
+                        {
+                            TechnologyId = 11,
+                            IsActive = true,
+                            Name = "Angular Material"
+                        },
+                        new
+                        {
+                            TechnologyId = 12,
+                            IsActive = true,
+                            Name = "Ant Design"
+                        },
+                        new
+                        {
+                            TechnologyId = 13,
+                            IsActive = true,
+                            Name = "Chakra UI"
+                        },
+                        new
+                        {
+                            TechnologyId = 14,
+                            IsActive = true,
+                            Name = "Node.js + Express"
+                        },
+                        new
+                        {
+                            TechnologyId = 15,
+                            IsActive = true,
+                            Name = ".NET Core"
+                        },
+                        new
+                        {
+                            TechnologyId = 16,
+                            IsActive = true,
+                            Name = "Django"
+                        },
+                        new
+                        {
+                            TechnologyId = 17,
+                            IsActive = true,
+                            Name = "Flask"
+                        },
+                        new
+                        {
+                            TechnologyId = 18,
+                            IsActive = true,
+                            Name = "Spring Boot"
+                        },
+                        new
+                        {
+                            TechnologyId = 19,
+                            IsActive = true,
+                            Name = "Ruby on Rails"
+                        },
+                        new
+                        {
+                            TechnologyId = 20,
+                            IsActive = true,
+                            Name = "PHP + Laravel"
+                        },
+                        new
+                        {
+                            TechnologyId = 21,
+                            IsActive = true,
+                            Name = "PostgreSQL"
+                        },
+                        new
+                        {
+                            TechnologyId = 22,
+                            IsActive = true,
+                            Name = "MySQL"
+                        },
+                        new
+                        {
+                            TechnologyId = 23,
+                            IsActive = true,
+                            Name = "MariaDB"
+                        },
+                        new
+                        {
+                            TechnologyId = 24,
+                            IsActive = true,
+                            Name = "SQLite"
+                        },
+                        new
+                        {
+                            TechnologyId = 25,
+                            IsActive = true,
+                            Name = "Microsoft SQL Server"
+                        },
+                        new
+                        {
+                            TechnologyId = 26,
+                            IsActive = true,
+                            Name = "MongoDB"
+                        },
+                        new
+                        {
+                            TechnologyId = 27,
+                            IsActive = true,
+                            Name = "Firebase"
+                        },
+                        new
+                        {
+                            TechnologyId = 28,
+                            IsActive = true,
+                            Name = "Cassandra"
+                        },
+                        new
+                        {
+                            TechnologyId = 29,
+                            IsActive = true,
+                            Name = "Redis"
+                        },
+                        new
+                        {
+                            TechnologyId = 30,
+                            IsActive = true,
+                            Name = "Neo4j"
+                        });
                 });
 
             modelBuilder.Entity("intervirew_helper_backend.Models.Candidate", b =>
