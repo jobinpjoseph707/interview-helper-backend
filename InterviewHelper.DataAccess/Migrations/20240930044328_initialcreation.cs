@@ -3,10 +3,12 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace intervirew_helper_backend.Migrations
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
+namespace InterviewHelper.DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class interviewHelper : Migration
+    public partial class initialcreation : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -144,6 +146,63 @@ namespace intervirew_helper_backend.Migrations
                         principalTable: "Technologies",
                         principalColumn: "TechnologyId",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "ApplicationRoles",
+                columns: new[] { "ApplicationRoleId", "IsActive", "Name" },
+                values: new object[,]
+                {
+                    { 1, true, "Front End Developer" },
+                    { 2, true, "Back End Developer" },
+                    { 3, true, "Database/SQl" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "ExperienceLevels",
+                columns: new[] { "ExperienceLevelId", "IsActive", "Level" },
+                values: new object[,]
+                {
+                    { 1, true, "Fresher" },
+                    { 2, true, "Mid" },
+                    { 3, true, "Senior" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Technologies",
+                columns: new[] { "TechnologyId", "IsActive", "Name" },
+                values: new object[,]
+                {
+                    { 1, true, "Angular" },
+                    { 2, true, "React" },
+                    { 3, true, "Vue.js" },
+                    { 4, true, "Svelte" },
+                    { 5, true, "HTML5" },
+                    { 6, true, "CSS3" },
+                    { 7, true, "JavaScript" },
+                    { 8, true, "TypeScript" },
+                    { 9, true, "Bootstrap" },
+                    { 10, true, "TailwindCSS" },
+                    { 11, true, "Angular Material" },
+                    { 12, true, "Ant Design" },
+                    { 13, true, "Chakra UI" },
+                    { 14, true, "Node.js + Express" },
+                    { 15, true, ".NET Core" },
+                    { 16, true, "Django" },
+                    { 17, true, "Flask" },
+                    { 18, true, "Spring Boot" },
+                    { 19, true, "Ruby on Rails" },
+                    { 20, true, "PHP + Laravel" },
+                    { 21, true, "PostgreSQL" },
+                    { 22, true, "MySQL" },
+                    { 23, true, "MariaDB" },
+                    { 24, true, "SQLite" },
+                    { 25, true, "Microsoft SQL Server" },
+                    { 26, true, "MongoDB" },
+                    { 27, true, "Firebase" },
+                    { 28, true, "Cassandra" },
+                    { 29, true, "Redis" },
+                    { 30, true, "Neo4j" }
                 });
 
             migrationBuilder.CreateIndex(

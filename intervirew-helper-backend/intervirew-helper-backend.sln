@@ -3,7 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35027.167
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "intervirew-helper-backend", "intervirew-helper-backend.csproj", "{86BF1199-F5FE-40B1-9310-88F2A3471142}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InterviewHelper.API", "InterviewHelper.API.csproj", "{86BF1199-F5FE-40B1-9310-88F2A3471142}"
+	ProjectSection(ProjectDependencies) = postProject
+		{0AEDA7F6-6F98-4E16-AA9E-7C9677FBEAC5} = {0AEDA7F6-6F98-4E16-AA9E-7C9677FBEAC5}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InterviewHelper.Business", "..\InterviewHelper.Business\InterviewHelper.Business.csproj", "{0AEDA7F6-6F98-4E16-AA9E-7C9677FBEAC5}"
+	ProjectSection(ProjectDependencies) = postProject
+		{86B635D2-EAB4-42A9-94C4-38E681FF6820} = {86B635D2-EAB4-42A9-94C4-38E681FF6820}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InterviewHelper.DataAccess", "..\InterviewHelper.DataAccess\InterviewHelper.DataAccess.csproj", "{86B635D2-EAB4-42A9-94C4-38E681FF6820}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +25,14 @@ Global
 		{86BF1199-F5FE-40B1-9310-88F2A3471142}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{86BF1199-F5FE-40B1-9310-88F2A3471142}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{86BF1199-F5FE-40B1-9310-88F2A3471142}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0AEDA7F6-6F98-4E16-AA9E-7C9677FBEAC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0AEDA7F6-6F98-4E16-AA9E-7C9677FBEAC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0AEDA7F6-6F98-4E16-AA9E-7C9677FBEAC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0AEDA7F6-6F98-4E16-AA9E-7C9677FBEAC5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86B635D2-EAB4-42A9-94C4-38E681FF6820}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86B635D2-EAB4-42A9-94C4-38E681FF6820}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86B635D2-EAB4-42A9-94C4-38E681FF6820}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86B635D2-EAB4-42A9-94C4-38E681FF6820}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
