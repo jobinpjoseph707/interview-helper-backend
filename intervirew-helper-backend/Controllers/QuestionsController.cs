@@ -1,4 +1,5 @@
-﻿using InterviewHelper.Business.services.IServices;
+﻿using InterviewHelper.Business.DTOs;
+using InterviewHelper.Business.services.IServices;
 using intervirew_helper_backend.DTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -28,6 +29,21 @@ namespace intervirew_helper_backend.Controllers
             }
 
             return Ok(result);
+        }
+        // New method to update candidate's overall score and review
+        [HttpPost("update-candidate-score")]
+        public async Task<IActionResult> UpdateCandidateScore([FromBody] UpdateCandidateScoreRequest request)
+        {
+            await _questionService.UpdateCandidateScoreAndReview(request.CandidateId, request.OverallScore, request.Review);
+            return Ok("Candidate score and review updated successfully.");
+        }
+
+        // New method to update individual technology scores
+        [HttpPost("update-technology-scores")]
+        public async Task<IActionResult> UpdateTechnologyScores([FromBody] UpdateTechnologyScoresRequest request)
+        {
+            await _questionService.UpdateCandidateTechnologyScore(request.CandidateId, request.TechnologyScores);
+            return Ok("Technology scores updated successfully.");
         }
 
     }

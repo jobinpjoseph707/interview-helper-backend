@@ -10,5 +10,7 @@ namespace InterviewHelper.Business.services.IServices
     public interface IQuestionService
     {
         Task<List<RoleResultResponse>> GetQuestions(QuestionRequest request);
+        Task UpdateCandidateScoreAndReview(int candidateId, decimal overallScore, string review);
+        Task UpdateCandidateTechnologyScore(int candidateId, Dictionary<int, decimal> technologyScores);
     }
 }

@@ -11,6 +11,7 @@ namespace intervirew_helper_backend.Models
         public DateTime InterviewDate { get; set; }
         public decimal OverallScore { get; set; }
         public bool IsActive { get; set; } = true;  // Soft delete indicator
+        public string Review { get; set; }
 
         // Navigation properties
         public ApplicationRole ApplicationRole { get; set; }

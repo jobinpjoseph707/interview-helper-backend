@@ -27,6 +27,30 @@ namespace InterviewHelper.DataAccess.Repository
                              q.IsActive)  // Ensure the question is active
                 .ToListAsync();
         }
+        // New method to update candidate's overall score and review
+        public async Task UpdateCandidateScoreAndReview(int candidateId, decimal overallScore, string review)
+        {
+            var candidate = await _context.Candidates.FindAsync(candidateId);
+            if (candidate != null)
+            {
+                candidate.OverallScore = overallScore;
+                candidate.Review = review;
+                await _context.SaveChangesAsync();
+            }
+        }
+
+        // New method to update score for each technology
+        public async Task UpdateCandidateTechnologyScore(int candidateId, int technologyId, decimal score)
+        {
+            var candidateTechnologyScore = await _context.CandidateTechnologyScores
+                .FirstOrDefaultAsync(cts => cts.CandidateId == candidateId && cts.TechnologyId == technologyId);
+
+            if (candidateTechnologyScore != null)
+            {
+                candidateTechnologyScore.Score = score;
+                await _context.SaveChangesAsync();
+            }
+        }
     }
 
 }

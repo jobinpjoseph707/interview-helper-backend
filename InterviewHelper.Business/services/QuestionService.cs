@@ -51,6 +51,20 @@ namespace InterviewHelper.Business.services
 
             return groupedQuestions;
         }
+        // New method to update overall score and review
+        public async Task UpdateCandidateScoreAndReview(int candidateId, decimal overallScore, string review)
+        {
+            await _questionRepository.UpdateCandidateScoreAndReview(candidateId, overallScore, review);
+        }
+
+        // New method to update scores for individual technologies
+        public async Task UpdateCandidateTechnologyScore(int candidateId, Dictionary<int, decimal> technologyScores)
+        {
+            foreach (var entry in technologyScores)
+            {
+                await _questionRepository.UpdateCandidateTechnologyScore(candidateId, entry.Key, entry.Value);
+            }
+        }
     }
 
 }
