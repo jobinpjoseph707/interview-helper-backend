@@ -1,7 +1,10 @@
-﻿namespace intervirew_helper_backend.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace intervirew_helper_backend.Models
 {
     public class Candidate
     {
+        [Key]
         public int CandidateId { get; set; }
         public string Name { get; set; }
         public int ApplicationRoleId { get; set; }  // Foreign Key to ApplicationRole

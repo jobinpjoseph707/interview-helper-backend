@@ -1,7 +1,10 @@
-﻿namespace intervirew_helper_backend.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace intervirew_helper_backend.Models
 {
     public class ExperienceLevel
     {
+        [Key]
         public int ExperienceLevelId { get; set; }
         public string Level { get; set; }
         public bool IsActive { get; set; } = true;
