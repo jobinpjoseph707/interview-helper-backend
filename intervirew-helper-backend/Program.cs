@@ -32,6 +32,8 @@ builder.Services.AddScoped<IExperienceLevelRepository, ExperienceLevelRepository
 builder.Services.AddScoped<IExperienceLevelService, ExperienceLevelService>();
 builder.Services.AddScoped<ITechnologyRepository, TechnologyRepository>();
 builder.Services.AddScoped<ITechnologyService, TechnologyService>();
+builder.Services.AddScoped<IQuestionRepository, QuestionRepository>();
+builder.Services.AddScoped<IQuestionService, QuestionService>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
