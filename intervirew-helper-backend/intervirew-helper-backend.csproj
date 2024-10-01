@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-    <Nullable>disable</Nullable>
+    <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>intervirew_helper_backend</RootNamespace>
   </PropertyGroup>
@@ -23,12 +23,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Controllers\" />
     <Folder Include="Logs\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\InterviewHelper.Business\InterviewHelper.Business.csproj" />
-    <ProjectReference Include="..\InterviewHelper.DataAccess\InterviewHelper.DataAccess.csproj" />
   </ItemGroup>
 
 </Project>
