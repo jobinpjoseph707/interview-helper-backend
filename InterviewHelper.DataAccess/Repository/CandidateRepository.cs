@@ -13,37 +13,16 @@ namespace intervirew_helper_backend.Repository
             _context = context;
         }
 
-        public async Task<IEnumerable<Candidate>> GetAllCandidatesAsync()
-        {
-            return await _context.Candidates.Include(c => c.ApplicationRole).Where(c => c.IsActive).ToListAsync();
-        }
-
-        public async Task<Candidate> GetCandidateByIdAsync(int id)
-        {
-            return await _context.Candidates.Include(c => c.ApplicationRole)
-                .FirstOrDefaultAsync(c => c.CandidateId == id && c.IsActive);
-        }
-
-        public async Task AddCandidateAsync(Candidate candidate)
+        public async Task<Candidate> AddCandidateAsync(Candidate candidate)
         {
             await _context.Candidates.AddAsync(candidate);
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync(); // Ensure this is awaited if it's an async method
+            return candidate; // Return the candidate
         }
 
-        public async Task UpdateCandidateAsync(Candidate candidate)
+        public async Task<Candidate> GetCandidateByIdAsync(int candidateId)
         {
-            _context.Candidates.Update(candidate);
-            await _context.SaveChangesAsync();
-        }
-
-        public async Task DeleteCandidateAsync(int id)
-        {
-            var candidate = await _context.Candidates.FindAsync(id);
-            if (candidate != null)
-            {
-                candidate.IsActive = false;
-                await _context.SaveChangesAsync();
-            }
+            return await _context.Candidates.FindAsync(candidateId);
         }
     }
 

@@ -2,13 +2,13 @@
 
 namespace intervirew_helper_backend.Repository.IRepository
 {
-    public interface ICandidateRepository
-    {
-        Task<IEnumerable<Candidate>> GetAllCandidatesAsync();
-        Task<Candidate> GetCandidateByIdAsync(int id);
-        Task AddCandidateAsync(Candidate candidate);
-        Task UpdateCandidateAsync(Candidate candidate);
-        Task DeleteCandidateAsync(int id);
-    }
+
+        public interface ICandidateRepository
+        {
+            Task<Candidate> AddCandidateAsync(Candidate candidate);
+            Task<Candidate> GetCandidateByIdAsync(int candidateId);
+        }
+
+    
 
 }

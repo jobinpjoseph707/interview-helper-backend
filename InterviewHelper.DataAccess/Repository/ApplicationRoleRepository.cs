@@ -16,11 +16,11 @@ namespace InterviewHelper.DataAccess.Repository
             _context = context;
         }
 
-   
+
         public async Task<IEnumerable<ApplicationRole>> GetAllApplicationRolesAsync()
         {
             return await _context.ApplicationRoles
-                .Where(ar => ar.IsActive) 
+                .Where(ar => ar.IsActive)
                 .ToListAsync();
         }
     }

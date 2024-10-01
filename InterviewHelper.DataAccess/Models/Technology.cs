@@ -1,7 +1,10 @@
-﻿namespace intervirew_helper_backend.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace intervirew_helper_backend.Models
 {
     public class Technology
     {
+        [Key]
         public int TechnologyId { get; set; }
         public string Name { get; set; }
         public bool IsActive { get; set; } = true;
