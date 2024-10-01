@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace InterviewHelper.DataAccess.Repository.IRepository
 {
-    public interface IApplicationRoleRepository
+    public interface IExperienceLevelRepository
     {
-        Task<IEnumerable<ApplicationRole>> GetAllApplicationRolesAsync();
+        Task<IEnumerable<ExperienceLevel>> GetAllExperienceLevelsAsync();
     }
 }

@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InterviewHelper.DataAccess.Repository.IRepository
+namespace InterviewHelper.Business.services.IServices
 {
-    public interface IApplicationRoleRepository
+    public interface IApplicationRoleService
     {
         Task<IEnumerable<ApplicationRole>> GetAllApplicationRolesAsync();
     }

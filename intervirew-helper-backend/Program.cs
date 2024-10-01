@@ -3,6 +3,10 @@ using intervirew_helper_backend.Repository;
 using intervirew_helper_backend.services.IServices;
 using Microsoft.EntityFrameworkCore;
 using intervirew_helper_backend.services;
+using InterviewHelper.DataAccess.Repository.IRepository;
+using InterviewHelper.DataAccess.Repository;
+using InterviewHelper.Business.services.IServices;
+using InterviewHelper.Business.services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +18,12 @@ builder.Services.AddDbContext<InterviewAppDbContext>(options =>
 // Add repositories and services
 builder.Services.AddScoped<ICandidateRepository, CandidateRepository>();
 builder.Services.AddScoped<ICandidateService, CandidateService>();
+builder.Services.AddScoped<IApplicationRoleRepository, ApplicationRoleRepository>();
+builder.Services.AddScoped<IApplicationRoleService, ApplicationRoleService>();
+builder.Services.AddScoped<IExperienceLevelRepository, ExperienceLevelRepository>();
+builder.Services.AddScoped<IExperienceLevelService, ExperienceLevelService>();
+builder.Services.AddScoped<ITechnologyRepository, TechnologyRepository>();
+builder.Services.AddScoped<ITechnologyService, TechnologyService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
