@@ -1,6 +1,6 @@
 ﻿using InterviewHelper.Business.DTOs;
 using InterviewHelper.Business.services.IServices;
-using intervirew_helper_backend.DTO;
+using intervirew_helper_backend.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -34,6 +34,10 @@ namespace intervirew_helper_backend.Controllers
         [HttpPost("update-candidate-score")]
         public async Task<IActionResult> UpdateCandidateScore([FromBody] UpdateCandidateScoreRequest request)
         {
+            if (request == null)
+            {
+                return BadRequest("Invalid request.");
+            }
             await _questionService.UpdateCandidateScoreAndReview(request.CandidateId, request.OverallScore, request.Review);
             return Ok("Candidate score and review updated successfully.");
         }

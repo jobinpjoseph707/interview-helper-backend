@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace InterviewHelper.DataAccess.Repository.IRepository
 {
@@ -11,6 +10,8 @@ namespace InterviewHelper.DataAccess.Repository.IRepository
     {
         Task<List<Question>> GetQuestionsByTechnologiesAndExperienceLevels(List<int> technologyIds, List<int> experienceLevelIds);
 
+        /*        Task<List<Question>> GetQuestionsByTechnologiesAndExperienceLevels(List<TechnologyExperience> techExpPairs);
+        */
         // New method to update the candidate's overall score and review
         Task UpdateCandidateScoreAndReview(int candidateId, decimal overallScore, string review);
 

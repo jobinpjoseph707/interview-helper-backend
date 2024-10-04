@@ -1,11 +1,10 @@
 ﻿using InterviewHelper.DataAccess.Repository.IRepository;
 using intervirew_helper_backend.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+
+
+
 
 namespace InterviewHelper.DataAccess.Repository
 {
@@ -17,17 +16,45 @@ namespace InterviewHelper.DataAccess.Repository
         {
             _context = context;
         }
-
+        /*  public async Task<List<Question>> GetQuestionsByTechnologiesAndExperienceLevels(techExpPairs)
+          {
+              return await _context.Questions
+                  .Include(q => q.Technology)
+                  .Where(q => q.IsActive &&
+                               techExpPairs.Any(pair => pair.TechnologyId == q.TechnologyId &&
+                                                        pair.ExperienceLevelId == q.ExperienceLevelId))
+                  .ToListAsync();
+          }
+  */
         public async Task<List<Question>> GetQuestionsByTechnologiesAndExperienceLevels(List<int> technologyIds, List<int> experienceLevelIds)
         {
             return await _context.Questions
-                .Include(q => q.Technology)  // Include the Technology relationship
-                .Where(q => technologyIds.Contains(q.TechnologyId) &&
-                             experienceLevelIds.Contains(q.ExperienceLevelId) &&
-                             q.IsActive)  // Ensure the question is active
-                .ToListAsync();
+                       .Include(q => q.Technology)
+                       .Where(q => q.IsActive &&
+                                   technologyIds.Contains(q.TechnologyId) &&
+                                   experienceLevelIds.Contains(q.ExperienceLevelId) && q.IsActive)
+                       .ToListAsync();
         }
-        // New method to update candidate's overall score and review
+
+        /*        public async Task<List<Question>> GetQuestionsByTechnologiesAndExperienceLevels(List<int> technologyIds, List<int> experienceLevelIds)
+        */
+        /*
+                public async Task<List<Question>> GetQuestionsByTechnologyExperiencePairs(List<TechnologyExperience> techExpPairs)
+                {
+                    return await _context.Questions
+                            .Include(q => q.Technology)  // Include the Technology relationship
+                            .Where(q => q.IsActive &&
+                                         techExpPairs.Any(pair => pair.TechnologyId == q.TechnologyId &&
+                                                                  pair.ExperienceLevelId == q.ExperienceLevelId))
+                            .ToListAsync();
+                    *//*return await _context.Questions
+                        .Include(q => q.Technology)  // Include the Technology relationship
+                        .Where(q => technologyIds.Contains(q.TechnologyId) &&
+                                     experienceLevelIds.Contains(q.ExperienceLevelId) &&
+                                     q.IsActive)  // Ensure the question is active
+                        .ToListAsync();*//*
+                }
+                // New method to update candidate's overall score and review*/
         public async Task UpdateCandidateScoreAndReview(int candidateId, decimal overallScore, string review)
         {
             var candidate = await _context.Candidates.FindAsync(candidateId);

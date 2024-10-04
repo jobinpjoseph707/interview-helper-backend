@@ -1,8 +1,9 @@
-﻿namespace intervirew_helper_backend.DTO
+﻿namespace InterviewHelper.Business.DTOs
 {
     public class RoleResultResponse
     {
         public string Name { get; set; }  // Role/technology name
+        public int TechnologyId { get; set; }  // Add TechnologyId field
         public List<QuestionResponse> Questions { get; set; }
     }
     public class QuestionResponse

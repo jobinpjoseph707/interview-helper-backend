@@ -1,5 +1,5 @@
-﻿namespace intervirew_helper_backend.DTO
-{
+﻿namespace InterviewHelper.Business.DTOs
+{ 
     public class QuestionRequest
     {
         public int CandidateId { get; set; }
@@ -13,3 +13,4 @@
     }
 
 }
+
