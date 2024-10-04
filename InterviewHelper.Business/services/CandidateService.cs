@@ -1,59 +1,102 @@
-﻿using InterviewHelper.Business.DTOs;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using InterviewHelper.Business.DTOs;
 using intervirew_helper_backend.Models;
 using intervirew_helper_backend.Repository.IRepository;
 using intervirew_helper_backend.services.IServices;
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using AutoMapper; // Import AutoMapper namespace
 
 namespace intervirew_helper_backend.services
 {
     public class CandidateService : ICandidateService
     {
         private readonly ICandidateRepository _candidateRepository;
-        private readonly InterviewAppDbContext _dbContext;
-        private readonly IMapper _mapper; // Declare a field for IMapper
+        private readonly IMapper _mapper;
 
-        // Update the constructor to accept the repository, DbContext, and IMapper
-        public CandidateService(ICandidateRepository candidateRepository, InterviewAppDbContext dbContext, IMapper mapper)
+        public CandidateService(ICandidateRepository candidateRepository, IMapper mapper)
         {
             _candidateRepository = candidateRepository;
-            _dbContext = dbContext;
-            _mapper = mapper; // Assign the injected IMapper to the field
+            _mapper = mapper;
         }
 
         public async Task<Candidate> CreateCandidateAsync(CandidateDto candidateDto)
         {
-            // Check if the ApplicationRoleId exists in the ApplicationRoles table
-            var roleExists = await _dbContext.ApplicationRoles
-                .AnyAsync(ar => ar.ApplicationRoleId == candidateDto.ApplicationRoleId);
+            var applicationRoles = await _candidateRepository.GetAllApplicationRolesAsync();
+            var roleExists = applicationRoles.Any(ar => ar.ApplicationRoleId == candidateDto.ApplicationRoleId);
 
             if (!roleExists)
             {
                 throw new Exception("Invalid ApplicationRoleId.");
             }
 
-            // Map CandidateDto to Candidate using AutoMapper
             var candidate = _mapper.Map<Candidate>(candidateDto);
 
-            // Ensure candidate.TechnologyScores is not null
             candidate.CandidateTechnologyScores = candidateDto.Technologies?.Select(t => new CandidateTechnologyScore
             {
                 TechnologyId = t.TechnologyId,
                 ExperienceLevelId = t.ExperienceLevelId,
                 Score = t.Score,
                 IsActive = true
-            }).ToList() ?? new List<CandidateTechnologyScore>(); // If null, create an empty list
+            }).ToList() ?? new List<CandidateTechnologyScore>();
 
-            // Calculate the overall score, defaulting to 0 if Technologies is null
             candidate.OverallScore = candidateDto.Technologies?.Sum(t => t.Score) ?? 0;
 
-            // Save the candidate to the database
             return await _candidateRepository.AddCandidateAsync(candidate);
         }
+
+        public async Task<IEnumerable<CandidateDto>> GetFilteredCandidatesAsync(string name, int? roleId, DateTime? fromDate, DateTime? toDate)
+        {
+            var query = _candidateRepository.GetQueryableCandidates();
+
+            if (!string.IsNullOrWhiteSpace(name))
+            {
+                query = query.Where(c => c.Name.Contains(name));
+            }
+
+            if (roleId.HasValue)
+            {
+                query = query.Where(c => c.ApplicationRoleId == roleId.Value);
+            }
+
+            if (fromDate.HasValue)
+            {
+                query = query.Where(c => c.InterviewDate >= fromDate.Value);
+            }
+
+            if (toDate.HasValue)
+            {
+                query = query.Where(c => c.InterviewDate <= toDate.Value);
+            }
+
+            var candidates = await query.ToListAsync();
+
+            return _mapper.Map<IEnumerable<CandidateDto>>(candidates);
+        }
+
 
         public async Task<Candidate> GetCandidateByIdAsync(int candidateId)
         {
             return await _candidateRepository.GetCandidateByIdAsync(candidateId);
         }
+
+        public async Task<IEnumerable<Technology>> GetAllTechnologiesAsync()
+        {
+            return await _candidateRepository.GetAllTechnologiesAsync();
+        }
+
+        public async Task<IEnumerable<ExperienceLevel>> GetAllExperienceLevelsAsync()
+        {
+            return await _candidateRepository.GetAllExperienceLevelsAsync();
+        }
+
+        public async Task<IEnumerable<ApplicationRole>> GetAllApplicationRolesAsync()
+        {
+            return await _candidateRepository.GetAllApplicationRolesAsync();
+        }
+
+
     }
 }
