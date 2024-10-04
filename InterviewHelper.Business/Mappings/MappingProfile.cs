@@ -17,16 +17,16 @@ namespace InterviewHelper.Business.Profiles
 
             // Map CandidateTechnologyScore to CandidateTechnologyScoreDto
             CreateMap<CandidateTechnologyScore, CandidateTechnologyScoreDto>()
-                .ForMember(dest => dest.Score, opt => opt.MapFrom(src => src.Score)) // Assuming there's a Score property in CandidateTechnologyScore
-                .ForMember(dest => dest.TechnologyId, opt => opt.MapFrom(src => src.TechnologyId)) // Ensure TechnologyId maps correctly
-                .ForMember(dest => dest.ExperienceLevelId, opt => opt.MapFrom(src => src.ExperienceLevelId)); // Ensure ExperienceLevelId maps correctly
+                .ForMember(dest => dest.Score, opt => opt.MapFrom(src => src.Score)) 
+                .ForMember(dest => dest.TechnologyId, opt => opt.MapFrom(src => src.TechnologyId))
+                .ForMember(dest => dest.ExperienceLevelId, opt => opt.MapFrom(src => src.ExperienceLevelId)); 
 
             // Map CandidateTechnologyScoreDto to CandidateTechnologyScore
             CreateMap<CandidateTechnologyScoreDto, CandidateTechnologyScore>()
-                .ForMember(dest => dest.Technology, opt => opt.Ignore()) // Ignore Technology property if it exists in the model
-                .ForMember(dest => dest.Score, opt => opt.MapFrom(src => src.Score)) // Map Score from DTO
-                .ForMember(dest => dest.TechnologyId, opt => opt.MapFrom(src => src.TechnologyId)) // Map TechnologyId from DTO
-                .ForMember(dest => dest.ExperienceLevelId, opt => opt.MapFrom(src => src.ExperienceLevelId)); // Map ExperienceLevelId from DTO
+                .ForMember(dest => dest.Technology, opt => opt.Ignore())
+                .ForMember(dest => dest.Score, opt => opt.MapFrom(src => src.Score))
+                .ForMember(dest => dest.TechnologyId, opt => opt.MapFrom(src => src.TechnologyId)) 
+                .ForMember(dest => dest.ExperienceLevelId, opt => opt.MapFrom(src => src.ExperienceLevelId)); 
         }
     }
 }
