@@ -7,7 +7,7 @@ using InterviewHelper.DataAccess.Repository.IRepository;
 using InterviewHelper.DataAccess.Repository;
 using InterviewHelper.Business.services.IServices;
 using InterviewHelper.Business.services;
-using InterviewHelper.Business.Profiles;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
