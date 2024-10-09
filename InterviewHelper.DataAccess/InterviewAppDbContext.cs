@@ -11,8 +11,10 @@ public class InterviewAppDbContext : DbContext
     public DbSet<ExperienceLevel> ExperienceLevels { get; set; }
     public DbSet<CandidateTechnologyScore> CandidateTechnologyScores { get; set; }
     public DbSet<Question> Questions { get; set; }
+    public DbSet<User> User{ get; set; }
 
-    
+
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         // Configure relationships and constraints

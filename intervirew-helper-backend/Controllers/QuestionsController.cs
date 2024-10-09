@@ -39,7 +39,9 @@ namespace intervirew_helper_backend.Controllers
                 return BadRequest("Invalid request.");
             }
             await _questionService.UpdateCandidateScoreAndReview(request.CandidateId, request.OverallScore, request.Review);
-            return Ok("Candidate score and review updated successfully.");
+/*            return Ok("Candidate score and review updated successfully.");
+*/            return Ok(new { message = "Score updated successfully." }); // Ensure a JSON response is returned
+
         }
 
         // New method to update individual technology scores
@@ -47,7 +49,10 @@ namespace intervirew_helper_backend.Controllers
         public async Task<IActionResult> UpdateTechnologyScores([FromBody] UpdateTechnologyScoresRequest request)
         {
             await _questionService.UpdateCandidateTechnologyScore(request.CandidateId, request.TechnologyScores);
-            return Ok("Technology scores updated successfully.");
+            /*            return Ok("Technology scores updated successfully.");
+             *            
+            */
+            return Ok(new { message = "Score updated successfully." }); // Ensure a JSON response is returned
         }
 
     }
