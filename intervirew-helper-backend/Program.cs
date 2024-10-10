@@ -7,6 +7,11 @@ using InterviewHelper.DataAccess.Repository.IRepository;
 using InterviewHelper.DataAccess.Repository;
 using InterviewHelper.Business.services.IServices;
 using InterviewHelper.Business.services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using Microsoft.OpenApi.Models;
+using intervirew_helper_backend.Repository.IRepository.intervirew_helper_backend.Repository.IRepository;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -34,10 +39,71 @@ builder.Services.AddScoped<ITechnologyRepository, TechnologyRepository>();
 builder.Services.AddScoped<ITechnologyService, TechnologyService>();
 builder.Services.AddScoped<IQuestionRepository, QuestionRepository>();
 builder.Services.AddScoped<IQuestionService, QuestionService>();
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(option =>
+{
+    option.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Description =
+             "JWT Authorization header using the Bearer scheme. \r\n\r\n " +
+             "Enter 'Bearer' [space] and then your token in the text input below.\r\n\r\n" +
+             "Example: \"Bearer 12345abcdef\"",
+        Name = "Authorization",
+        In = ParameterLocation.Header,
+        Type = SecuritySchemeType.ApiKey,
+        Scheme = "Bearer"
+    });
+    option.AddSecurityRequirement(new OpenApiSecurityRequirement()
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                },
+                Scheme = "oauth2",
+                Name = "Bearer",
+                In = ParameterLocation.Header,
+            },
+            new List<string>()
+        }
+    });
+});
+var key = Encoding.ASCII.GetBytes(builder.Configuration["ApiSettings:Key"]);
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(options =>
+{
+    options.RequireHttpsMetadata = false;
+    options.SaveToken = true;
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        /*        ValidateIssuer = true,
+                ValidateAudience = true,
+                ValidateLifetime = true,
+                ValidateIssuerSigningKey = true,
+                ValidIssuer = builder.Configuration["ApiSettings:Issuer"],
+                ValidAudience = builder.Configuration["ApiSettings:Audience"],
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["ApiSettings:Key"]))
+        */
+
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(key),
+        ValidateIssuer = false,
+        ValidateAudience = false
+    };
+});
+
 
 // Configure CORS policy to allow requests from Angular app
 builder.Services.AddCors(options =>
@@ -62,6 +128,12 @@ if (app.Environment.IsDevelopment())
 app.UseCors("AllowAngularApp"); // Use the CORS policy
 
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
+
+app.UseHttpsRedirection();
+
+app.UseRouting();
 
 app.UseAuthorization();
 
