@@ -21,9 +21,17 @@ namespace intervirew_helper_backend.Controllers
         [HttpPost]
         public async Task<ActionResult<Candidate>> PostCandidate(CandidateDto candidateDto)
         {
-            var createdCandidate = await _candidateService.CreateCandidateAsync(candidateDto);
-            return CreatedAtAction(nameof(GetCandidateById), new { id = createdCandidate.CandidateId }, createdCandidate);
+            try
+            {
+                var createdCandidate = await _candidateService.CreateCandidateAsync(candidateDto);
+                return CreatedAtAction(nameof(GetCandidateById), new { id = createdCandidate.CandidateId }, createdCandidate);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new Dictionary<string, object> { { "message", ex.Message } });
+            }
         }
+
 
         // GET: api/Candidates/5
         [HttpGet("{id}")]
@@ -34,8 +42,7 @@ namespace intervirew_helper_backend.Controllers
             {
                 return NotFound();
             }
-
-            return candidate;
+            return Ok(candidate);
         }
 
         [HttpGet]
@@ -48,7 +55,7 @@ namespace intervirew_helper_backend.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(new { message = ex.Message });
+                return BadRequest(new Dictionary<string, object> { { "message", ex.Message } });
             }
         }
     }

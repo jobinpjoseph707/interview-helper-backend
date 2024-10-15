@@ -21,16 +21,25 @@ namespace intervirew_helper_backend.Controllers
         [HttpPost("get-questions")]
         public async Task<ActionResult<IEnumerable<RoleResultResponse>>> GetQuestions([FromBody] QuestionRequest request)
         {
-            var result = await _questionService.GetQuestions(request);
-
-            if (result == null)
+            // Check if the request or technologies are invalid
+            if (request == null || request.Technologies == null || !request.Technologies.Any())
             {
                 return BadRequest("Invalid request or no technologies provided.");
             }
 
+            // Call the service to get questions
+            var result = await _questionService.GetQuestions(request);
+
+            // Check if the result from the service is null or empty
+            if (result == null || !result.Any())
+            {
+                return BadRequest("No questions found.");
+            }
+
             return Ok(result);
         }
-        // New method to update candidate's overall score and review
+
+
         [HttpPost("update-candidate-score")]
         public async Task<IActionResult> UpdateCandidateScore([FromBody] UpdateCandidateScoreRequest request)
         {
@@ -38,11 +47,18 @@ namespace intervirew_helper_backend.Controllers
             {
                 return BadRequest("Invalid request.");
             }
-            await _questionService.UpdateCandidateScoreAndReview(request.CandidateId, request.OverallScore, request.Review);
-/*            return Ok("Candidate score and review updated successfully.");
-*/            return Ok(new { message = "Score updated successfully." }); // Ensure a JSON response is returned
 
+            await _questionService.UpdateCandidateScoreAndReview(request.CandidateId, request.OverallScore, request.Review);
+
+            // Create a dictionary to store the response message
+            var response = new Dictionary<string, object>
+    {
+        { "message", "Score updated successfully." }
+    };
+
+            return Ok(response); // Return the dictionary as JSON
         }
+
 
         // New method to update individual technology scores
         [HttpPost("update-technology-scores")]
