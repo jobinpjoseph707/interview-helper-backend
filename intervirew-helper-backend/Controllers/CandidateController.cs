@@ -1,6 +1,7 @@
 ﻿using InterviewHelper.Business.DTOs;
 using intervirew_helper_backend.Models;
 using intervirew_helper_backend.services.IServices;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace intervirew_helper_backend.Controllers
@@ -8,6 +9,8 @@ namespace intervirew_helper_backend.Controllers
 
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize] // This will ensure that only valid tokens can access this controller
+
     public class CandidateController : ControllerBase
     {
         private readonly ICandidateService _candidateService;

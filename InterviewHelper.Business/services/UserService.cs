@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using BCrypt.Net;
+using InterviewHelper.Business.DTOs;
 using intervirew_helper_backend.Models;
 using intervirew_helper_backend.Repository.IRepository;
 using intervirew_helper_backend.Repository.IRepository.intervirew_helper_backend.Repository.IRepository;
@@ -36,7 +37,8 @@ namespace intervirew_helper_backend.services
             {
                 return null;
             }
-            return user;
+            return user; // Ensure `IsActive` is retrieved correctly here
+
         }
 
     }

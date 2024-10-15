@@ -7,8 +7,8 @@ namespace intervirew_helper_backend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-/*    [Authorize] // This will ensure that only valid tokens can access this controller
-*/
+    [Authorize] // This will ensure that only valid tokens can access this controller
+
     public class ApplicationRoleController : ControllerBase
     {
         private readonly IApplicationRoleService _applicationRoleService;
