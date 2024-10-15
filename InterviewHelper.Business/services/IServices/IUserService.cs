@@ -1,4 +1,5 @@
-﻿using intervirew_helper_backend.Models;
+﻿using InterviewHelper.Business.DTOs;
+using intervirew_helper_backend.Models;
 
 namespace intervirew_helper_backend.services.IServices
 {

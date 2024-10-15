@@ -22,7 +22,7 @@ namespace InterviewHelper.DataAccess.Repository
 
         public async Task<IEnumerable<Technology>> GetAllTechnologiesAsync()
         {
-            return await _context.Technologies
+            return await _context.Technologie
                 .Where(ar => ar.IsActive)
                 .ToListAsync();
         }

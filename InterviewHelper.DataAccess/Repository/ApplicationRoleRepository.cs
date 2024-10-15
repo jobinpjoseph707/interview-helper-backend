@@ -19,7 +19,7 @@ namespace InterviewHelper.DataAccess.Repository
 
         public async Task<IEnumerable<ApplicationRole>> GetAllApplicationRolesAsync()
         {
-            return await _context.ApplicationRoles
+            return await _context.ApplicationRole
                 .Where(ar => ar.IsActive)
                 .ToListAsync();
         }

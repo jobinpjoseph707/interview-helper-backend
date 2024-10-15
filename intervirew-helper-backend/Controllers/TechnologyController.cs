@@ -1,11 +1,14 @@
 ﻿using InterviewHelper.Business.services.IServices;
 using intervirew_helper_backend.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace intervirew_helper_backend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize] // This will ensure that only valid tokens can access this controller
+
     public class TechnologyController : ControllerBase
     {
         private readonly ITechnologyService _technologyService;
