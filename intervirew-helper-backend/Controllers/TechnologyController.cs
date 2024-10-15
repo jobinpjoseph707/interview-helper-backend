@@ -21,8 +21,12 @@ namespace intervirew_helper_backend.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Technology>>> GetAllTechnologies()
         {
-            var roles = await _technologyService.GetAllTechnologiesAsync();
-            return Ok(roles);
+            var technologies = await _technologyService.GetAllTechnologiesAsync();
+            if (technologies == null || !technologies.Any()) 
+            {
+                return NotFound(); 
+            }
+            return Ok(technologies);
         }
     }
 }

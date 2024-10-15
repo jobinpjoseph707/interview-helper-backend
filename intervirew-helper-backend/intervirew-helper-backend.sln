@@ -8,12 +8,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InterviewHelper.API", "Inte
 		{0AEDA7F6-6F98-4E16-AA9E-7C9677FBEAC5} = {0AEDA7F6-6F98-4E16-AA9E-7C9677FBEAC5}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InterviewHelper.Business", "..\InterviewHelper.Business\InterviewHelper.Business.csproj", "{0AEDA7F6-6F98-4E16-AA9E-7C9677FBEAC5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InterviewHelper.Business", "..\InterviewHelper.Business\InterviewHelper.Business.csproj", "{0AEDA7F6-6F98-4E16-AA9E-7C9677FBEAC5}"
 	ProjectSection(ProjectDependencies) = postProject
 		{86B635D2-EAB4-42A9-94C4-38E681FF6820} = {86B635D2-EAB4-42A9-94C4-38E681FF6820}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InterviewHelper.DataAccess", "..\InterviewHelper.DataAccess\InterviewHelper.DataAccess.csproj", "{86B635D2-EAB4-42A9-94C4-38E681FF6820}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InterviewHelper.DataAccess", "..\InterviewHelper.DataAccess\InterviewHelper.DataAccess.csproj", "{86B635D2-EAB4-42A9-94C4-38E681FF6820}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InterviewHelper_UnitTest", "..\InterviewHelper_UnitTest\InterviewHelper_UnitTest.csproj", "{F7AE53D6-6F1B-44C8-A5CC-4F1C0FF5D193}"
+	ProjectSection(ProjectDependencies) = postProject
+		{0AEDA7F6-6F98-4E16-AA9E-7C9677FBEAC5} = {0AEDA7F6-6F98-4E16-AA9E-7C9677FBEAC5}
+		{86B635D2-EAB4-42A9-94C4-38E681FF6820} = {86B635D2-EAB4-42A9-94C4-38E681FF6820}
+		{86BF1199-F5FE-40B1-9310-88F2A3471142} = {86BF1199-F5FE-40B1-9310-88F2A3471142}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +40,10 @@ Global
 		{86B635D2-EAB4-42A9-94C4-38E681FF6820}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{86B635D2-EAB4-42A9-94C4-38E681FF6820}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{86B635D2-EAB4-42A9-94C4-38E681FF6820}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7AE53D6-6F1B-44C8-A5CC-4F1C0FF5D193}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7AE53D6-6F1B-44C8-A5CC-4F1C0FF5D193}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7AE53D6-6F1B-44C8-A5CC-4F1C0FF5D193}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7AE53D6-6F1B-44C8-A5CC-4F1C0FF5D193}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

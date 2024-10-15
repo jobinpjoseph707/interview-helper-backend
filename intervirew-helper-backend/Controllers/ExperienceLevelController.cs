@@ -22,8 +22,15 @@ namespace intervirew_helper_backend.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ExperienceLevel>>> GetAllExperienceLevels()
         {
-            var roles = await _experienceLevelService.GetAllExperienceLevelsAsync();
-            return Ok(roles);
+            var levels = await _experienceLevelService.GetAllExperienceLevelsAsync();
+
+            if (levels == null || !levels.Any()) // Check if levels are null or empty
+            {
+                return NotFound(); // Return NotFound if no levels exist
+            }
+
+            return Ok(levels); // Return Ok with the levels if found
         }
+
     }
 }
