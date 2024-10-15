@@ -5,12 +5,12 @@ public class InterviewAppDbContext : DbContext
 {
     public InterviewAppDbContext(DbContextOptions<InterviewAppDbContext> options) : base(options) { }
 
-    public DbSet<Candidate> Candidates { get; set; }
-    public DbSet<ApplicationRole> ApplicationRoles { get; set; }
-    public DbSet<Technology> Technologies { get; set; }
-    public DbSet<ExperienceLevel> ExperienceLevels { get; set; }
-    public DbSet<CandidateTechnologyScore> CandidateTechnologyScores { get; set; }
-    public DbSet<Question> Questions { get; set; }
+    public DbSet<Candidate> Candidate { get; set; }
+    public DbSet<ApplicationRole> ApplicationRole { get; set; }
+    public DbSet<Technology> Technologie { get; set; }
+    public DbSet<ExperienceLevel> ExperienceLevel { get; set; }
+    public DbSet<CandidateTechnologyScore> CandidateTechnologyScore { get; set; }
+    public DbSet<Question> Question { get; set; }
     public DbSet<User> User{ get; set; }
 
 

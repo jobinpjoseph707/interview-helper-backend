@@ -21,7 +21,7 @@ namespace InterviewHelper.DataAccess.Repository
 
         public async Task<IEnumerable<ExperienceLevel>> GetAllExperienceLevelsAsync()
         {
-            return await _context.ExperienceLevels
+            return await _context.ExperienceLevel
                 .Where(ar => ar.IsActive)
                 .ToListAsync();
         }

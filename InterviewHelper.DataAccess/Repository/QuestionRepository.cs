@@ -28,7 +28,7 @@ namespace InterviewHelper.DataAccess.Repository
   */
         public async Task<List<Question>> GetQuestionsByTechnologiesAndExperienceLevels(List<int> technologyIds, List<int> experienceLevelIds)
         {
-            return await _context.Questions
+            return await _context.Question
                        .Include(q => q.Technology)
                        .Where(q => q.IsActive &&
                                    technologyIds.Contains(q.TechnologyId) &&
@@ -57,7 +57,7 @@ namespace InterviewHelper.DataAccess.Repository
                 // New method to update candidate's overall score and review*/
         public async Task UpdateCandidateScoreAndReview(int candidateId, decimal overallScore, string review)
         {
-            var candidate = await _context.Candidates.FindAsync(candidateId);
+            var candidate = await _context.Candidate.FindAsync(candidateId);
             if (candidate != null)
             {
                 candidate.OverallScore = overallScore;
@@ -69,7 +69,7 @@ namespace InterviewHelper.DataAccess.Repository
         // New method to update score for each technology
         public async Task UpdateCandidateTechnologyScore(int candidateId, int technologyId, decimal score)
         {
-            var candidateTechnologyScore = await _context.CandidateTechnologyScores
+            var candidateTechnologyScore = await _context.CandidateTechnologyScore
                 .FirstOrDefaultAsync(cts => cts.CandidateId == candidateId && cts.TechnologyId == technologyId);
 
             if (candidateTechnologyScore != null)

@@ -22,7 +22,7 @@ namespace intervirew_helper_backend.Repository
 
             try
             {
-                await _context.Candidates.AddAsync(candidate);
+                await _context.Candidate.AddAsync(candidate);
                 await _context.SaveChangesAsync();
                 return candidate;
             }
@@ -35,7 +35,7 @@ namespace intervirew_helper_backend.Repository
 
         public async Task<Candidate> GetCandidateByIdAsync(int candidateId)
         {
-            var candidate = await _context.Candidates.FindAsync(candidateId);
+            var candidate = await _context.Candidate.FindAsync(candidateId);
             if (candidate == null)
             {
                 throw new KeyNotFoundException($"Candidate with ID {candidateId} not found.");
@@ -47,7 +47,7 @@ namespace intervirew_helper_backend.Repository
         {
             try
             {
-                return await _context.Candidates
+                return await _context.Candidate
                     .Include(c => c.CandidateTechnologyScores)
                     .Where(c => c.IsActive)
                     .ToListAsync();
@@ -62,7 +62,7 @@ namespace intervirew_helper_backend.Repository
         {
             try
             {
-                return await _context.Technologies.ToListAsync();
+                return await _context.Technologie.ToListAsync();
             }
             catch (DbUpdateException ex)
             {
@@ -75,7 +75,7 @@ namespace intervirew_helper_backend.Repository
         {
             try
             {
-                return await _context.ExperienceLevels.ToListAsync();
+                return await _context.ExperienceLevel.ToListAsync();
             }
             catch (DbUpdateException ex)
             {
@@ -88,7 +88,7 @@ namespace intervirew_helper_backend.Repository
         {
             try
             {
-                return await _context.ApplicationRoles.ToListAsync();
+                return await _context.ApplicationRole.ToListAsync();
             }
             catch (DbUpdateException ex)
             {
@@ -99,7 +99,7 @@ namespace intervirew_helper_backend.Repository
 
         public IQueryable<Candidate> GetQueryableCandidates()
         {
-            return _context.Candidates
+            return _context.Candidate
                 .Include(c => c.CandidateTechnologyScores)
                 .ThenInclude(cts => cts.Technology)
                 .Include(c => c.CandidateTechnologyScores)
