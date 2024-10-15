@@ -168,6 +168,85 @@ public class QuestionsControllerTest
         Assert.That(response["message"], Is.EqualTo("Score updated successfully."));
     }
 
+    //Failure Test for   [HttpPost("update-candidate-score")]
+    [Test]
+    public async Task UpdateCandidateScore_ReturnsBadRequest_WhenRequestIsNull()
+    {
+        // Act
+        var actionResult = await _controller.UpdateCandidateScore(null);
+
+        // Assert
+        Assert.That(actionResult, Is.InstanceOf<BadRequestObjectResult>());
+
+        var badRequestResult = actionResult as BadRequestObjectResult;
+
+        // Ensure BadRequest result is not null
+        Assert.That(badRequestResult, Is.Not.Null);
+
+        // Assert that the status code is 400 (Bad Request)
+        Assert.That(badRequestResult.StatusCode, Is.EqualTo(400));
+
+        // Assert that the message is "Invalid request."
+        Assert.That(badRequestResult.Value, Is.EqualTo("Invalid request."));
+    }
+
+    //Happy Test for  [HttpPost("update-technology-scores")]
+
+    [Test]
+    public async Task UpdateTechnologyScores_ReturnsOkResult_WhenScoreUpdated()
+    {
+        // Arrange
+        var validRequest = new UpdateTechnologyScoresRequest
+        {
+            CandidateId = 1,
+            TechnologyScores = new Dictionary<int, decimal>
+        {
+            { 1, 100.00m }
+        }
+
+        };
+
+        _questionServiceMock.Setup(service => service.UpdateCandidateTechnologyScore(
+            validRequest.CandidateId, validRequest.TechnologyScores))
+            .Returns(Task.CompletedTask);
+
+        // Act
+        var actionResult = await _controller.UpdateTechnologyScores(validRequest);
+
+        // Assert
+        Assert.That(actionResult, Is.InstanceOf<OkObjectResult>()); // Expecting OkObjectResult
+        var okResult = actionResult as OkObjectResult;
+
+        // Assert that the status code is 200
+        Assert.That(okResult.StatusCode, Is.EqualTo(200));
+
+        // Cast okResult.Value to IDictionary to access the 'message' property
+        var response = okResult.Value as IDictionary<string, object>;
+
+        Assert.That(response["message"], Is.EqualTo("Score updated successfully."));
+    }
+
+    //Failure Test for   [HttpPost("update-technology-scores")]
+    [Test]
+    public async Task UpdateTechnologyScores_ReturnsBadRequest_WhenRequestIsNull()
+    {
+        // Act
+        var actionResult = await _controller.UpdateTechnologyScores(null);
+
+        // Assert
+        Assert.That(actionResult, Is.InstanceOf<BadRequestObjectResult>());
+
+        var badRequestResult = actionResult as BadRequestObjectResult;
+
+        // Ensure BadRequest result is not null
+        Assert.That(badRequestResult, Is.Not.Null);
+
+        // Assert that the status code is 400 (Bad Request)
+        Assert.That(badRequestResult.StatusCode, Is.EqualTo(400));
+
+        // Assert that the message is "Invalid request."
+        Assert.That(badRequestResult.Value, Is.EqualTo("Invalid request."));
+    }
 
 }
 

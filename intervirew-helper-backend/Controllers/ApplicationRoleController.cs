@@ -1,5 +1,6 @@
 ﻿using InterviewHelper.Business.services.IServices;
 using intervirew_helper_backend.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
