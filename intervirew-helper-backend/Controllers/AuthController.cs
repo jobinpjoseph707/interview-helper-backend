@@ -47,12 +47,20 @@ namespace intervirew_helper_backend.Controllers
         {
             if (userAuth == null || string.IsNullOrEmpty(userAuth.UserName) || string.IsNullOrEmpty(userAuth.UserPassword))
             {
-                return BadRequest("Invalid user data.");
+                return BadRequest(new Dictionary<string, string>
+        {
+            { "status", "error" },
+            { "message", "Invalid user data." }
+        });
             }
 
             if (await _userService.IsUserExist(userAuth.UserName))
             {
-                return Conflict("User already exists.");
+                return Conflict(new Dictionary<string, string>
+        {
+            { "status", "error" },
+            { "message", "User already exists." }
+        });
             }
 
             // Create a User object from the UserAuth DTO
@@ -64,7 +72,11 @@ namespace intervirew_helper_backend.Controllers
             };
 
             await _userService.AddUser(user);
-            return Ok("User registered successfully.");
+            return Ok(new Dictionary<string, string>
+    {
+        { "status", "success" },
+        { "message", "User registered successfully." }
+    });
         }
 
         [HttpPost("login")]

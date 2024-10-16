@@ -7,7 +7,7 @@ public class InterviewAppDbContext : DbContext
 
     public DbSet<Candidate> Candidate { get; set; }
     public DbSet<ApplicationRole> ApplicationRole { get; set; }
-    public DbSet<Technology> Technologie { get; set; }
+    public DbSet<Technology> Technology{ get; set; }
     public DbSet<ExperienceLevel> ExperienceLevel { get; set; }
     public DbSet<CandidateTechnologyScore> CandidateTechnologyScore { get; set; }
     public DbSet<Question> Question { get; set; }
