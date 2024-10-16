@@ -67,12 +67,29 @@ namespace intervirew_helper_backend.Controllers
         [HttpPost("update-technology-scores")]
         public async Task<IActionResult> UpdateTechnologyScores([FromBody] UpdateTechnologyScoresRequest request)
         {
-            await _questionService.UpdateCandidateTechnologyScore(request.CandidateId, request.TechnologyScores);
-            /*            return Ok("Technology scores updated successfully.");
-             *            
-            */
-            return Ok(new { message = "Score updated successfully." }); // Ensure a JSON response is returned
+            if (request == null)
+            {
+                return BadRequest("Invalid request."); // Return a bad request if the request is null
+            }
+
+            try
+            {
+                await _questionService.UpdateCandidateTechnologyScore(request.CandidateId, request.TechnologyScores);
+            }
+            catch (Exception ex)
+            {
+                // Log the exception if needed
+                return StatusCode(500, "An error occurred while updating technology scores."); // Optional error message
+            }
+
+            var response = new Dictionary<string, object>
+    {
+        { "message", "Score updated successfully." }
+    };
+
+            return Ok(response); // Return the dictionary as JSON
         }
 
     }
-}
+    }
+
