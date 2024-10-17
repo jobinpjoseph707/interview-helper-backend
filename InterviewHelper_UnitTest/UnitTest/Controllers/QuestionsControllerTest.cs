@@ -214,7 +214,7 @@ public class QuestionsControllerTest
         var actionResult = await _controller.UpdateTechnologyScores(validRequest);
 
         // Assert
-        Assert.That(actionResult, Is.InstanceOf<OkObjectResult>()); // Expecting OkObjectResult
+        Assert.That(actionResult, Is.InstanceOf<OkObjectResult>()); 
         var okResult = actionResult as OkObjectResult;
 
         // Assert that the status code is 200
