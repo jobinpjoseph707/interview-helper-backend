@@ -62,7 +62,7 @@ namespace intervirew_helper_backend.Repository
         {
             try
             {
-                return await _context.Technologie.ToListAsync();
+                return await _context.Technology.ToListAsync();
             }
             catch (DbUpdateException ex)
             {
