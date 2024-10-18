@@ -9,5 +9,5 @@ namespace intervirew_helper_backend.services.IServices
         Task AddUser(User user);
         Task<User> ValidateUser(string username, string password);
     }
-
+    
 }

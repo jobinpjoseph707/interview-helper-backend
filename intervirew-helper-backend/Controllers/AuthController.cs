@@ -96,7 +96,6 @@ namespace intervirew_helper_backend.Controllers
                 return StatusCode(StatusCodes.Status403Forbidden, new
                 {
                     Message = "Your account is not active.",
-                    IsActive = user.IsActive
                 });
             }
 
@@ -117,6 +116,14 @@ namespace intervirew_helper_backend.Controllers
 
         private string GenerateJwtToken(User user)
         {
+            if (user == null || string.IsNullOrEmpty(user.UserName)) // Ensure UserName is not null
+            {
+                throw new ArgumentNullException(nameof(user), "User cannot be null or have an empty UserName.");
+            }
+            if (string.IsNullOrEmpty(user.UserName)) // Ensure UserName is not null or empty
+            {
+                throw new ArgumentNullException(nameof(user.UserName), "UserName cannot be null or empty.");
+            }
             var claims = new[]
             {
                 new Claim(ClaimTypes.Name, user.UserName)
