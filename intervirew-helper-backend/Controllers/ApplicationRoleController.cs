@@ -25,10 +25,19 @@ namespace intervirew_helper_backend.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ApplicationRole>>> GetAllApplicationRoles()
         {
-            var roles = await _applicationRoleService.GetAllApplicationRolesAsync();
-            if (roles == null || !roles.Any()) // Check for null or empty list
-                return NotFound();
-            return Ok(roles);
+            try
+            {
+                var roles = await _applicationRoleService.GetAllApplicationRolesAsync();
+                if (roles == null || !roles.Any()) // Check for null or empty list
+                {
+                    return NotFound("No application roles found.");
+                }
+                return Ok(roles);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new Dictionary<string, object> { { "message", ex.Message } });
+            }
         }
     }
 }

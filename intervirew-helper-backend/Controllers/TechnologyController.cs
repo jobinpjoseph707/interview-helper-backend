@@ -21,12 +21,19 @@ namespace intervirew_helper_backend.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Technology>>> GetAllTechnologies()
         {
-            var technologies = await _technologyService.GetAllTechnologiesAsync();
-            if (technologies == null || !technologies.Any()) 
+            try
             {
-                return NotFound(); 
+                var technologies = await _technologyService.GetAllTechnologiesAsync();
+                if (technologies == null || !technologies.Any())
+                {
+                    return NotFound("No technologies found.");
+                }
+                return Ok(technologies);
             }
-            return Ok(technologies);
+            catch (Exception ex)
+            {
+                return BadRequest(new Dictionary<string, object> { { "message", ex.Message } });
+            }
         }
     }
 }
