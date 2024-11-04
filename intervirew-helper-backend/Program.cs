@@ -1,18 +1,17 @@
-using intervirew_helper_backend.Repository.IRepository;
-using intervirew_helper_backend.Repository;
-using intervirew_helper_backend.services.IServices;
-using Microsoft.EntityFrameworkCore;
-using intervirew_helper_backend.services;
-using InterviewHelper.DataAccess.Repository.IRepository;
-using InterviewHelper.DataAccess.Repository;
-using InterviewHelper.Business.services.IServices;
 using InterviewHelper.Business.services;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
-using Microsoft.OpenApi.Models;
+using InterviewHelper.Business.services.IServices;
+using InterviewHelper.DataAccess.Repository;
+using InterviewHelper.DataAccess.Repository.IRepository;
+using intervirew_helper_backend.Repository;
+using intervirew_helper_backend.Repository.IRepository;
 using intervirew_helper_backend.Repository.IRepository.intervirew_helper_backend.Repository.IRepository;
-
+using intervirew_helper_backend.services;
+using intervirew_helper_backend.services.IServices;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,6 +25,7 @@ builder.Services.AddControllers().AddJsonOptions(options =>
     options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
 });
 
+// Add AutoMapper
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 // Add repositories and services
@@ -42,16 +42,16 @@ builder.Services.AddScoped<IQuestionService, QuestionService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+// Configure Swagger/OpenAPI
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(option =>
 {
     option.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         Description =
-             "JWT Authorization header using the Bearer scheme. \r\n\r\n " +
-             "Enter 'Bearer' [space] and then your token in the text input below.\r\n\r\n" +
-             "Example: \"Bearer 12345abcdef\"",
+            "JWT Authorization header using the Bearer scheme. \r\n\r\n " +
+            "Enter 'Bearer' [space] and then your token in the text input below.\r\n\r\n" +
+            "Example: \"Bearer 12345abcdef\"",
         Name = "Authorization",
         In = ParameterLocation.Header,
         Type = SecuritySchemeType.ApiKey,
@@ -75,8 +75,9 @@ builder.Services.AddSwaggerGen(option =>
         }
     });
 });
-var key = Encoding.ASCII.GetBytes(builder.Configuration["ApiSettings:Key"]);
 
+// JWT Authentication Configuration
+var key = Encoding.ASCII.GetBytes(builder.Configuration["ApiSettings:Key"]);
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -88,22 +89,12 @@ builder.Services.AddAuthentication(options =>
     options.SaveToken = true;
     options.TokenValidationParameters = new TokenValidationParameters
     {
-        /*        ValidateIssuer = true,
-                ValidateAudience = true,
-                ValidateLifetime = true,
-                ValidateIssuerSigningKey = true,
-                ValidIssuer = builder.Configuration["ApiSettings:Issuer"],
-                ValidAudience = builder.Configuration["ApiSettings:Audience"],
-                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["ApiSettings:Key"]))
-        */
-
         ValidateIssuerSigningKey = true,
         IssuerSigningKey = new SymmetricSecurityKey(key),
         ValidateIssuer = false,
         ValidateAudience = false
     };
 });
-
 
 // Configure CORS policy to allow requests from Angular app
 builder.Services.AddCors(options =>
@@ -118,23 +109,17 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Configure the HTTP request pipeline
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
+app.UseHttpsRedirection();
 app.UseCors("AllowAngularApp"); // Use the CORS policy
-
-app.UseHttpsRedirection();
-
-app.UseAuthentication();
-
-app.UseHttpsRedirection();
-
+app.UseAuthentication();          // Ensure Authentication is used before Authorization
 app.UseRouting();
-
 app.UseAuthorization();
 
 app.MapControllers();
